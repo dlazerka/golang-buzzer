@@ -2,10 +2,12 @@
   <library name="GOPATH &lt;buzzer&gt;">
     <CLASSES>
       <root url="file://$USER_HOME$/opt/go/GOPATH/src/github.com" />
+      <root url="file://$PROJECT_DIR$/../src" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="file://$USER_HOME$/opt/go/GOPATH/src/github.com" />
+      <root url="file://$PROJECT_DIR$/../src" />
     </SOURCES>
     <excluded>
       <root url="file://$PROJECT_DIR$" />

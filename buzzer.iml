@@ -5,6 +5,6 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="jdk" jdkName="Go 1.7.4" jdkType="Go SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="GOPATH &lt;buzzer&gt;" level="project" />
+    <orderEntry type="library" exported="" name="GOPATH &lt;buzzer&gt;" level="project" />
   </component>
 </module>
