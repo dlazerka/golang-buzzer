@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;buzzer&gt;">
+    <CLASSES>
+      <root url="file://$USER_HOME$/opt/go/GOPATH/src/github.com" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/opt/go/GOPATH/src/github.com" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>
