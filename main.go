@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"buzzer/tree"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"strconv"
@@ -14,12 +13,12 @@ func main() {
 	intervals := read()
 	//tree := make([]node, len(tickets))
 
-	head := tree.Node{intervals[0], intervals[0].end, nil, nil}
+	head := tree.Node{intervals[0], intervals[0].End, nil, nil}
 
 	for j := 1; j < len(intervals); j++ {
 		interval := intervals[j]
-		n := tree.Node{interval, interval.end, nil, nil}
-		head.add(n)
+		n := tree.Node{interval, interval.End, nil, nil}
+		head.Add(n)
 	}
 
 	write(head)
@@ -64,12 +63,18 @@ func write(head tree.Node) {
 	command := exec.Command("dot", "-T"+outFileType)
 	wc, err := command.StdinPipe()
 	check(err)
-	wc.Write([]byte(dot))
+	_, err = wc.Write([]byte(dot))
+	if err != nil {
+		panic(err)
+	}
 	wc.Close()
 
 	out, err := command.Output()
 
-	ioutil.WriteFile("graph."+outFileType, out, 0)
+	err = os.WriteFile("graph."+outFileType, out, 0)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func check(err error) {

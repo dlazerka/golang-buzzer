@@ -3,54 +3,54 @@ package tree
 import "strconv"
 
 type Node struct {
-	i Interval
-	m int
-	l *Node
-	r *Node
+	I Interval
+	M int
+	L *Node
+	R *Node
 }
 
-func (head *Node) add(node Node) {
+func (head *Node) Add(node Node) {
 	var subtree *Node // subtree head
 
-	if node.i.start < head.i.start {
-		if head.l == nil {
-			head.l = &node
+	if node.I.Start < head.I.Start {
+		if head.L == nil {
+			head.L = &node
 			subtree = &node
 		} else {
-			subtree = head.l
-			subtree.add(node)
+			subtree = head.L
+			subtree.Add(node)
 		}
 	} else {
-		if head.r == nil {
-			head.r = &node
+		if head.R == nil {
+			head.R = &node
 			subtree = &node
 		} else {
-			subtree = head.r
-			subtree.add(node)
+			subtree = head.R
+			subtree.Add(node)
 		}
 	}
 
-	if head.m < subtree.m {
-		head.m = subtree.m
+	if head.M < subtree.M {
+		head.M = subtree.M
 	}
 }
 
 // /////////////// Output in DOT format
 func (node Node) dotId() string {
-	return "\"[" + strconv.Itoa(node.i.start) +
-		", " + strconv.Itoa(node.i.end) + "]\" [label=" + strconv.Itoa(node.m) + "]"
+	return "\"[" + strconv.Itoa(node.I.Start) +
+		", " + strconv.Itoa(node.I.End) + "]\" [label=" + strconv.Itoa(node.M) + "]"
 }
 
 func (node Node) DotNode() string {
 	var result = ""
-	if node.l != nil {
-		result += node.dotId() + " -> " + node.l.dotId() + "\n"
-		result += node.l.DotNode()
+	if node.L != nil {
+		result += node.dotId() + " -> " + node.L.dotId() + "\n"
+		result += node.L.DotNode()
 	}
 
-	if node.r != nil {
-		result += node.dotId() + " -> " + node.r.dotId() + "\n"
-		result += node.r.DotNode()
+	if node.R != nil {
+		result += node.dotId() + " -> " + node.R.dotId() + "\n"
+		result += node.R.DotNode()
 	}
 
 	return result
