@@ -1,15 +1,14 @@
 package main
 
 import (
-	"fmt"
 	"bufio"
-	"strconv"
+	"buzzer/tree"
+	"fmt"
+	"io/ioutil"
 	"os"
 	"os/exec"
-	"io/ioutil"
-	tree "github.com/dlazerka/golang-buzzer/tree"
+	"strconv"
 )
-
 
 func main() {
 	intervals := read()
@@ -17,7 +16,7 @@ func main() {
 
 	head := tree.Node{intervals[0], intervals[0].end, nil, nil}
 
-	for j := 1; j < len(intervals); j ++ {
+	for j := 1; j < len(intervals); j++ {
 		interval := intervals[j]
 		n := tree.Node{interval, interval.end, nil, nil}
 		head.add(n)
@@ -25,7 +24,6 @@ func main() {
 
 	write(head)
 }
-
 
 func read() []tree.Interval {
 	f, err := os.Open("input.txt")
@@ -40,7 +38,7 @@ func read() []tree.Interval {
 	ticketsCount, err := strconv.Atoi(word)
 	check(err)
 
-	var tickets = make([]Interval, ticketsCount)
+	var tickets = make([]tree.Interval, ticketsCount)
 
 	for i := 0; i < ticketsCount; i++ {
 		scan.Scan()
@@ -51,19 +49,19 @@ func read() []tree.Interval {
 		end, err := strconv.Atoi(scan.Text())
 		check(err)
 
-		tickets[i] = Interval{start, end}
+		tickets[i] = tree.Interval{start, end}
 	}
 
 	return tickets
 }
 
-func write(head Node) {
-	dot := "digraph graphname {\n" + head.dotNode() + "}"
+func write(head tree.Node) {
+	dot := "digraph graphname {\n" + head.DotNode() + "}"
 
 	println(dot)
 
 	outFileType := "png"
-	command := exec.Command("dot", "-T" + outFileType)
+	command := exec.Command("dot", "-T"+outFileType)
 	wc, err := command.StdinPipe()
 	check(err)
 	wc.Write([]byte(dot))
@@ -71,7 +69,7 @@ func write(head Node) {
 
 	out, err := command.Output()
 
-	ioutil.WriteFile("graph." + outFileType, out, 0)
+	ioutil.WriteFile("graph."+outFileType, out, 0)
 }
 
 func check(err error) {
@@ -79,4 +77,3 @@ func check(err error) {
 		fmt.Print(err)
 	}
 }
-

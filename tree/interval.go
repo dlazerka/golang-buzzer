@@ -1,4 +1,4 @@
-package "github.com/golang-buzzer/tree"
+package tree
 
 type Interval struct {
 	start, end int

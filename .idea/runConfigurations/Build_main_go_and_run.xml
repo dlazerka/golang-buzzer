@@ -1,9 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Build main.go and run" type="GoApplicationRunConfiguration" factoryName="Go Application" singleton="true">
-    <module name="buzzer" />
-    <working_directory value="$PROJECT_DIR$" />
-    <filePath value="$PROJECT_DIR$/src/github.com/dlazerka/golang-buzzer/main.go" />
-    <kind value="FILE" />
-    <method />
-  </configuration>
-</component>

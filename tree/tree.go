@@ -1,9 +1,4 @@
-package
-
-import "strconv"
-
-package "github.com/golang-buzzer/tree"
-
+package tree
 
 import "strconv"
 
@@ -17,8 +12,8 @@ type Node struct {
 func (head *Node) add(node Node) {
 	var subtree *Node // subtree head
 
-	if (node.i.start < head.i.start) {
-		if (head.l == nil) {
+	if node.i.start < head.i.start {
+		if head.l == nil {
 			head.l = &node
 			subtree = &node
 		} else {
@@ -26,7 +21,7 @@ func (head *Node) add(node Node) {
 			subtree.add(node)
 		}
 	} else {
-		if (head.r == nil) {
+		if head.r == nil {
 			head.r = &node
 			subtree = &node
 		} else {
@@ -35,29 +30,27 @@ func (head *Node) add(node Node) {
 		}
 	}
 
-	if (head.m < subtree.m) {
+	if head.m < subtree.m {
 		head.m = subtree.m
 	}
 }
 
-
-
-///////////////// Output in DOT format
+// /////////////// Output in DOT format
 func (node Node) dotId() string {
 	return "\"[" + strconv.Itoa(node.i.start) +
 		", " + strconv.Itoa(node.i.end) + "]\" [label=" + strconv.Itoa(node.m) + "]"
 }
 
-func (node Node) dotNode() string {
+func (node Node) DotNode() string {
 	var result = ""
-	if (node.l != nil) {
+	if node.l != nil {
 		result += node.dotId() + " -> " + node.l.dotId() + "\n"
-		result += node.l.dotNode()
+		result += node.l.DotNode()
 	}
 
-	if (node.r != nil) {
+	if node.r != nil {
 		result += node.dotId() + " -> " + node.r.dotId() + "\n"
-		result += node.r.dotNode()
+		result += node.r.DotNode()
 	}
 
 	return result
